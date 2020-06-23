@@ -7,10 +7,12 @@ const lifes = document.querySelector('.lifes')
 class Obstacle {
   constructor() {
     // this.setPositionY();
+    this.timer = 0;
     this.append();
     this.setPositionX();
     // this.getRect();
-    this.setPosition();
+    // this.setPosition();
+    // this.setIntervalElement();
     // this.print();
   }
   append() {
@@ -39,29 +41,22 @@ class Obstacle {
   //     rect.height - 80)
   // }
 
-  setPosition() {
-    // this.positionZero = 0;
-    setInterval(() => {
-      const rect = this.obstacleElement.getClientRects()[0];
-      console.log(rect);
-      // console.log(rect.y)
-      this.rect = new DOMRect(
-        rect.x + 20,
-        rect.y + 20,
-        rect.width - 40,
-        rect.height - 80
-      )
-      // this.obstacleElement.style.top = `${teraz}px`;
-      if (rect.top > 630) {
-        this.obstacleElement.style.display = 'none';
-      }
-      // teraz++;
-      // console.log(teraz);
-      console.log(this.rect.y)
+  // console.log(rect.y)
+  // this.rect = new DOMRect(
+  //   rect.x + 20,
+  //   rect.y + 20,
+  //   rect.width - 40,
+  //   rect.height - 80
+  // )
+  // this.obstacleElement.style.top = `${teraz}px`;
+  // if (rect.top > 630) {
+  //   this.obstacleElement.style.display = 'none';
+  // }
+  // teraz++;
+  // console.log(teraz);
+  // console.log(this.rect.y)
 
 
-    }, 2040)
-  }
 }
 
 
@@ -142,6 +137,37 @@ class Game {
   }
 
 }
+
+
+
+const setIntervalElement = setInterval(() => {
+  this.timer += 5;
+}, 500);
+
+const setPosition = setInterval(() => {
+
+  let all = [...document.querySelectorAll('.obstacle')];
+  console.log(all);
+  let fff;
+  all.forEach(item => {
+    // this.setIntervalElement();
+    item.getClientRects()[0];
+    let fff = item.clientTop;
+    console.log(fff);
+
+    fff += 10;
+    item.style.top = `${fff}px`;
+    // console.log(`to jest ${this.timer}`);
+    console.log(item.clientTop);
+
+
+  }) // this.positionZero = 0;
+  // const rect = this.obstacleElement.getClientRects()[0];
+  // console.log(rect.y);
+  // let pos = rect.y;
+  all = [];
+}, 100)
+
 
 
 const game = new Game(7);
