@@ -1,32 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css" />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="main.css">
-  <title>Document</title>
-</head>
-
-<body>
-
-  <div class="container">
-    <div class="ship">
-
+  <body>
+    <div class="container">
+      <div class="ship"></div>
+    </div>
+    <div class="controlPanel">
+      <button class="button button--left">LEFT</button>
+      <button class="button button--right">RIGHT</button>
+      <p class="lifesLeft">Lifes left: <span class="lifes"> </span></p>
+      <p class="result">Result: <span class="score"> 220</span></p>
     </div>
 
-
-  </div>
-  <div class="controlPanel">
-    <button class="button button--left">LEFT</button>
-    <button class="button button--right">RIGHT</button>
-    <p class="lifesLeft">Lifes left: <span class="lifes"></span></p>
-    <p class="result">Result: <span class="score"></span></p>
-
-  </div>
-
-
-  <script src="./script.js"></script>
-</body>
-
+    <script src="./script.js"></script>
+  </body>
 </html>

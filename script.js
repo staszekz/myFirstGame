@@ -2,18 +2,28 @@
 const updateResult = document.querySelector(".score");
 const playground = document.querySelector(".container");
 const lifes = document.querySelector(".lifes");
+const score = document.querySelector(".score");
+let interval = 20;
 
 class Obstacle {
   constructor() {
-    this.timer = 0;
+    // this.timer = 0;
   }
 
   run() {
     this.append();
     this.setPositionX();
     this.setIntervalElement();
+    this.changeInterval();
   }
-
+  changeInterval() {
+    if (score.innerText > 100) {
+      interval = 10;
+    }
+    if (score.innerText > 200) {
+      interval = 5;
+    }
+  }
   append() {
     this.obstacleElement = document.createElement("div");
     this.obstacleElement.classList.add("obstacle");
@@ -23,10 +33,6 @@ class Obstacle {
   setPositionX() {
     this.obstacleElement.style.left = `${Math.floor(Math.random() * 560)}px`;
     this.obstacleElement.style.top = `0px`;
-  }
-
-  print() {
-    console.log(this.obstacleElement);
   }
 
   setIntervalElement() {
@@ -41,10 +47,11 @@ class Obstacle {
         obstacleElementRect.y + obstacleElementRect.height >=
         playgroundElementRect.y + playgroundElementRect.height
       ) {
+        lifes.innerText -= 1;
         clearInterval(this.moveIntervalRef);
         playground.removeChild(this.obstacleElement);
       }
-    }, 23);
+    }, interval);
   }
 }
 class Results {
@@ -98,19 +105,21 @@ class Game {
     // this.positionZero = 0;
     this.results = new Results(life);
     this.player = new Player();
-    this.log();
     this.createObstacle();
-    // this.setPosition();
-  }
-  log() {
-    console.log(this.player);
-    console.log(this.results.checkCanPlay(3));
+    lifes.innerText = life;
   }
   createObstacle() {
     setInterval(() => {
       new Obstacle().run();
-    }, 5000);
+    }, 3000);
+  }
+  stopGame() {
+    clearInterval(this.createObstacle);
   }
 }
 
-const game = new Game(7);
+const game = new Game(2);
+
+if (lifes.innerText === 0) {
+  this.stopGame();
+}
