@@ -32,7 +32,7 @@ class Obstacle {
   setIntervalElement() {
     this.moveIntervalRef = setInterval(() => {
       this.obstacleElement.style.top =
-        this.obstacleElement.offsetTop + 10 + "px";
+        this.obstacleElement.offsetTop + 5 + "px";
 
       const obstacleElementRect = this.obstacleElement.getClientRects()[0];
       const playgroundElementRect = playground.getClientRects()[0];
@@ -44,9 +44,9 @@ class Obstacle {
         clearInterval(this.moveIntervalRef);
         playground.removeChild(this.obstacleElement);
       }
-    }, 50);
+    }, 23);
+  }
 }
-
 class Results {
   constructor(lifes) {
     let _lifes = lifes;
@@ -62,7 +62,6 @@ class Results {
     };
   }
 }
-
 
 class Player {
   constructor() {
