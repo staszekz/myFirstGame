@@ -2,18 +2,29 @@
 const updateResult = document.querySelector(".score");
 const playground = document.querySelector(".container");
 const lifes = document.querySelector(".lifes");
+const score = document.querySelector(".score");
+const ship = document.querySelector(".ship");
+
+let interval = 20;
 
 class Obstacle {
-  constructor() {
-    this.timer = 0;
-  }
+  constructor() {}
 
   run() {
     this.append();
     this.setPositionX();
+    this.changeInterval();
+    this.collisionDetection();
     this.setIntervalElement();
   }
-
+  changeInterval() {
+    if (score.innerText > 100) {
+      interval = 15;
+    }
+    if (score.innerText > 200) {
+      interval = 10;
+    }
+  }
   append() {
     this.obstacleElement = document.createElement("div");
     this.obstacleElement.classList.add("obstacle");
@@ -24,11 +35,26 @@ class Obstacle {
     this.obstacleElement.style.left = `${Math.floor(Math.random() * 560)}px`;
     this.obstacleElement.style.top = `0px`;
   }
+  collisionDetection() {
+    this.collisionInterval = setInterval(() => {
+      const shipElementRect = ship.getClientRects()[0];
+      const obstacleElementRect = this.obstacleElement.getClientRects()[0];
+      console.log(obstacleElementRect.y);
+      console.log(obstacleElementRect.x);
+      console.log(obstacleElementRect.width);
+      console.log(shipElementRect.x);
 
-  print() {
-    console.log(this.obstacleElement);
+      if (
+        shipElementRect.x < obstacleElementRect.x + obstacleElementRect.width &&
+        shipElementRect.x + shipElementRect.width > obstacleElementRect.x &&
+        shipElementRect.y <
+          obstacleElementRect.y + obstacleElementRect.height &&
+        shipElementRect.y + shipElementRect.height > obstacleElementRect.y
+      ) {
+        console.log("collision detected");
+      }
+    }, 1000);
   }
-
   setIntervalElement() {
     this.moveIntervalRef = setInterval(() => {
       this.obstacleElement.style.top =
@@ -41,10 +67,18 @@ class Obstacle {
         obstacleElementRect.y + obstacleElementRect.height >=
         playgroundElementRect.y + playgroundElementRect.height
       ) {
+        lifes.innerText -= 1;
         clearInterval(this.moveIntervalRef);
         playground.removeChild(this.obstacleElement);
+        if (lifes.innerText < 1) {
+          lifes.innerText = 0;
+          let allElements = document.querySelectorAll(".obstacle");
+          allElements.forEach((element) => {
+            playground.removeChild(element);
+          });
+        }
       }
-    }, 23);
+    }, interval);
   }
 }
 class Results {
@@ -66,8 +100,8 @@ class Results {
 class Player {
   constructor() {
     this.positionX = 280;
-    this.ship = document.querySelector(".ship");
-    this.ship.style.left = `${this.positionX}px`;
+    // this.ship = document.querySelector(".ship");
+    ship.style.left = `${this.positionX}px`;
     this.btnLeft = document.querySelector(".button--left");
     this.btnRight = document.querySelector(".button--right");
     this.btnLeft.addEventListener("click", this.moveLeft.bind(this));
@@ -77,40 +111,58 @@ class Player {
   moveRight() {
     if (this.positionX >= 550) {
       this.positionX = 0;
-      this.ship.style.left = `${this.positionX}px`;
+      ship.style.left = `${this.positionX}px`;
     }
     this.positionX += 20;
-    this.ship.style.left = `${this.positionX}px`;
+    ship.style.left = `${this.positionX}px`;
   }
 
   moveLeft() {
     if (this.positionX <= 0) {
       this.positionX = 560;
-      this.ship.style.left = `${this.positionX}px`;
+      ship.style.left = `${this.positionX}px`;
     }
     this.positionX -= 20;
-    this.ship.style.left = `${this.positionX}px`;
+    ship.style.left = `${this.positionX}px`;
   }
 }
 
 class Game {
   constructor(life) {
     // this.positionZero = 0;
+    lifes.innerText = life;
     this.results = new Results(life);
     this.player = new Player();
-    this.log();
     this.createObstacle();
-    // this.setPosition();
-  }
-  log() {
-    console.log(this.player);
-    console.log(this.results.checkCanPlay(3));
+    // this.clearResult();
+    // this.clear();
+    console.log(lifes.innerText);
   }
   createObstacle() {
-    setInterval(() => {
+    this.startInterval = setInterval(() => {
       new Obstacle().run();
-    }, 5000);
+      if (lifes.innerText < 1) {
+        clearInterval(this.startInterval);
+      }
+    }, 2000);
   }
+  // clearResult() {
+  //   const lifesLeft = document.querySelector(".lifes");
+  //   console.log(lifesLeft.innerText);
+  //   setInterval(() => {
+  //     if (lifesLeft.innerText < 1) {
+  //       lifes.innerText = 0;
+  //     }
+  //   }, 10);
+  // }
+  // clear() {
+  //   if (lifes.innerText === 0) {
+  //     return this.stopGame();
+  //   }
+  // }
+  // stopGame() {
+  //   clearInterval(this.startInterval);
+  // }
 }
 
-const game = new Game(7);
+const game = new Game(2);
