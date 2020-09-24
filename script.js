@@ -10,12 +10,12 @@ let interval = 20;
 class Obstacle {
   constructor() {}
 
-  run() {
+  run(lp) {
     this.append();
     this.setPositionX();
     this.changeInterval();
-    this.collisionDetection();
-    this.setIntervalElement();
+    this.collisionDetection(lp);
+    this.setIntervalElement(lp);
   }
   changeInterval() {
     if (score.innerText > 100) {
@@ -35,11 +35,16 @@ class Obstacle {
     this.obstacleElement.style.left = `${Math.floor(Math.random() * 560)}px`;
     this.obstacleElement.style.top = `0px`;
   }
-  collisionDetection() {
+  collisionDetection(lp) {
     this.collisionInterval = setInterval(() => {
       const shipElementRect = ship.getClientRects()[0];
       const obstacleElementRect = this.obstacleElement.getClientRects()[0];
-      console.log(obstacleElementRect.y);
+
+      if (obstacleElementRect === undefined) {
+        return clearInterval(this.collisionInterval);
+      }
+
+      console.log(lp, obstacleElementRect);
       console.log(obstacleElementRect.x);
       console.log(obstacleElementRect.width);
       console.log(shipElementRect.x);
@@ -55,7 +60,7 @@ class Obstacle {
       }
     }, 1000);
   }
-  setIntervalElement() {
+  setIntervalElement(lp) {
     this.moveIntervalRef = setInterval(() => {
       this.obstacleElement.style.top =
         this.obstacleElement.offsetTop + 5 + "px";
@@ -63,12 +68,19 @@ class Obstacle {
       const obstacleElementRect = this.obstacleElement.getClientRects()[0];
       const playgroundElementRect = playground.getClientRects()[0];
 
+      if (obstacleElementRect === undefined) {
+        clearInterval(this.collisionInterval);
+        clearInterval(this.moveIntervalRef);
+
+        return;
+      }
+
       if (
         obstacleElementRect.y + obstacleElementRect.height >=
         playgroundElementRect.y + playgroundElementRect.height
       ) {
         lifes.innerText -= 1;
-        clearInterval(this.moveIntervalRef);
+
         playground.removeChild(this.obstacleElement);
         if (lifes.innerText < 1) {
           lifes.innerText = 0;
@@ -100,7 +112,6 @@ class Results {
 class Player {
   constructor() {
     this.positionX = 280;
-    // this.ship = document.querySelector(".ship");
     ship.style.left = `${this.positionX}px`;
     this.btnLeft = document.querySelector(".button--left");
     this.btnRight = document.querySelector(".button--right");
@@ -139,11 +150,14 @@ class Game {
     console.log(lifes.innerText);
   }
   createObstacle() {
+    let lp = 1;
     this.startInterval = setInterval(() => {
-      new Obstacle().run();
       if (lifes.innerText < 1) {
-        clearInterval(this.startInterval);
+        return clearInterval(this.startInterval);
       }
+
+      new Obstacle().run(lp);
+      lp++;
     }, 2000);
   }
   // clearResult() {
