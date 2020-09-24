@@ -5,7 +5,7 @@ const lifes = document.querySelector('.lifes');
 const score = document.querySelector('.score');
 const ship = document.querySelector('.ship');
 
-let interval = 80;
+let interval = 40;
 
 class Obstacle {
   constructor() {}
@@ -32,28 +32,20 @@ class Obstacle {
   }
 
   setPositionX() {
-    this.obstacleElement.style.left = `${Math.floor(Math.random() * 560)}px`;
+    this.obstacleElement.style.left = `${Math.floor(Math.random() * 520)}px`;
     this.obstacleElement.style.top = `0px`;
   }
   collisionDetection(lp) {
     this.collisionInterval = setInterval(() => {
       const shipElementRect = ship.getBoundingClientRect();
       const obstacleElementRect = this.obstacleElement.getBoundingClientRect();
-      console.log(`ship`, shipElementRect);
-      console.log(`obstacje`, obstacleElementRect);
-      // console.log(`rect`, ship.getBoundingClientRect());
+      // console.log(`ship`, shipElementRect);
+      // console.log(`obstacje`, obstacleElementRect);
+      // // console.log(`rect`, ship.getBoundingClientRect());
 
       if (obstacleElementRect === undefined) {
         return clearInterval(this.collisionInterval);
       }
-
-      // console.log(lp, obstacleElementRect);
-      // console.log('obstacle X', obstacleElementRect.x);
-      // console.log('kk', obstacleElementRect.width);
-      // console.log('ship X', shipElementRect.x);
-      // console.log(`obstacje bottom`, obstacleElementRect.bottom);
-      // console.log(`ship top`, shipElementRect.top);
-      // console.log(`numer`, lp);
 
       if (
         shipElementRect.x <= obstacleElementRect.x + obstacleElementRect.width &&
@@ -61,13 +53,13 @@ class Obstacle {
         obstacleElementRect.bottom >= shipElementRect.top
       ) {
         console.log('collision detected');
-        this.obstacleElement.style.background = 'blue';
+        playground.removeChild(this.obstacleElement);
       }
-    }, 2000);
+    }, interval);
   }
   setIntervalElement(lp) {
     this.moveIntervalRef = setInterval(() => {
-      this.obstacleElement.style.top = this.obstacleElement.offsetTop + 5 + 'px';
+      this.obstacleElement.style.top = this.obstacleElement.offsetTop + 3 + 'px';
 
       const obstacleElementRect = this.obstacleElement.getClientRects()[0];
       const playgroundElementRect = playground.getClientRects()[0];
@@ -124,20 +116,24 @@ class Player {
   }
 
   moveRight() {
-    if (this.positionX >= 550) {
-      this.positionX = 0;
+    if (this.positionX >= 520) {
+      this.positionX = -20;
       ship.style.left = `${this.positionX}px`;
     }
+
     this.positionX += 20;
+    console.log(`position`, this.positionX);
     ship.style.left = `${this.positionX}px`;
   }
 
   moveLeft() {
     if (this.positionX <= 0) {
-      this.positionX = 560;
+      this.positionX = 540;
       ship.style.left = `${this.positionX}px`;
     }
+
     this.positionX -= 20;
+    console.log(`position left`, this.positionX);
     ship.style.left = `${this.positionX}px`;
   }
 }
@@ -162,7 +158,7 @@ class Game {
 
       new Obstacle().run(lp);
       lp++;
-    }, 2000);
+    }, 4000);
   }
   // clearResult() {
   //   const lifesLeft = document.querySelector(".lifes");
