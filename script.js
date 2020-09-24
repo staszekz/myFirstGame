@@ -59,7 +59,7 @@ class Obstacle {
   }
   setIntervalElement(lp) {
     this.moveIntervalRef = setInterval(() => {
-      this.obstacleElement.style.top = this.obstacleElement.offsetTop + 3 + 'px';
+      this.obstacleElement.style.top = this.obstacleElement.offsetTop + 5 + 'px';
 
       const obstacleElementRect = this.obstacleElement.getClientRects()[0];
       const playgroundElementRect = playground.getClientRects()[0];
@@ -113,6 +113,7 @@ class Player {
     this.btnRight = document.querySelector('.button--right');
     this.btnLeft.addEventListener('click', this.moveLeft.bind(this));
     this.btnRight.addEventListener('click', this.moveRight.bind(this));
+    document.addEventListener('keydown', this.moveByKeyDown.bind(this));
   }
 
   moveRight() {
@@ -120,7 +121,6 @@ class Player {
       this.positionX = -20;
       ship.style.left = `${this.positionX}px`;
     }
-
     this.positionX += 20;
     console.log(`position`, this.positionX);
     ship.style.left = `${this.positionX}px`;
@@ -131,10 +131,18 @@ class Player {
       this.positionX = 540;
       ship.style.left = `${this.positionX}px`;
     }
-
     this.positionX -= 20;
     console.log(`position left`, this.positionX);
     ship.style.left = `${this.positionX}px`;
+  }
+
+  moveByKeyDown(e) {
+    if (e.code === 'ArrowRight' || e.code === 'KeyD') {
+      this.moveRight();
+    }
+    if (e.code === 'ArrowLeft' || e.code === 'KeyA') {
+      this.moveLeft();
+    }
   }
 }
 
@@ -158,7 +166,7 @@ class Game {
 
       new Obstacle().run(lp);
       lp++;
-    }, 4000);
+    }, 3000);
   }
   // clearResult() {
   //   const lifesLeft = document.querySelector(".lifes");
