@@ -4,6 +4,7 @@ const playground = document.querySelector('.container');
 const lifes = document.querySelector('.lifes');
 const score = document.querySelector('.score');
 const ship = document.querySelector('.ship');
+let initialResult = 0;
 
 let interval = 40;
 
@@ -52,8 +53,9 @@ class Obstacle {
         obstacleElementRect.x <= shipElementRect.x + shipElementRect.width &&
         obstacleElementRect.bottom >= shipElementRect.top
       ) {
-        console.log('collision detected');
+        console.log('collision detected', score.innerText);
         playground.removeChild(this.obstacleElement);
+        score.innerText = ++initialResult;
       }
     }, interval);
   }
@@ -150,6 +152,7 @@ class Game {
   constructor(life) {
     // this.positionZero = 0;
     lifes.innerText = life;
+    score.innerText = 0;
     this.results = new Results(life);
     this.player = new Player();
     this.createObstacle();
