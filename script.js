@@ -5,8 +5,8 @@ const lifes = document.querySelector('.lifes');
 const score = document.querySelector('.score');
 const ship = document.querySelector('.ship');
 let initialResult = 0;
-
-let interval = 40;
+let gameInterval = 3000;
+let interval = 25;
 
 class Obstacle {
   constructor() {}
@@ -19,11 +19,20 @@ class Obstacle {
     this.setIntervalElement(lp);
   }
   changeInterval() {
-    if (score.innerText > 100) {
+    if (score.innerText > 10) {
+      interval = 20;
+    }
+    if (score.innerText > 20) {
+      gameInterval = 2500;
+    }
+    if (score.innerText > 30) {
       interval = 15;
     }
-    if (score.innerText > 200) {
-      interval = 10;
+    if (score.innerText > 40) {
+      gameInterval = 2000;
+    }
+    if (score.innerText > 50) {
+      gameInterval = 1500;
     }
   }
   append() {
@@ -61,7 +70,7 @@ class Obstacle {
   }
   setIntervalElement(lp) {
     this.moveIntervalRef = setInterval(() => {
-      this.obstacleElement.style.top = this.obstacleElement.offsetTop + 5 + 'px';
+      this.obstacleElement.style.top = this.obstacleElement.offsetTop + 3 + 'px';
 
       const obstacleElementRect = this.obstacleElement.getClientRects()[0];
       const playgroundElementRect = playground.getClientRects()[0];
@@ -169,7 +178,7 @@ class Game {
 
       new Obstacle().run(lp);
       lp++;
-    }, 3000);
+    }, gameInterval);
   }
   // clearResult() {
   //   const lifesLeft = document.querySelector(".lifes");

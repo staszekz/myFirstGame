@@ -37,10 +37,13 @@
 }
 
 .button {
-  width: 70px;
-  height: 50px;
-  margin-right: 10px;
-  background-color: lightsteelblue;
+  width: 100px;
+  height: 60px;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  border-radius: 7px;
+  border: 2px solid orangered;
+  background: orange;
 }
 
 .lifesLeft,
@@ -60,4 +63,59 @@
   background-size: contain;
   overflow: hidden;
   /* border: 1px solid black; */
+}
+
+.start {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 50vh;
+  width: 50vw;
+  background-color: rgb(166, 107, 221);
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
+}
+.start__player {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  margin: 10px auto;
+  background-color: inherit;
+}
+.start__name {
+  background-color: inherit;
+}
+.input {
+  background-color: lightgray;
+  border: none;
+  border-radius: 50px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 10px 20px 10px 40px;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.input::placeholder {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.start__header {
+  margin: 0 auto;
+  background-color: inherit;
+}
+
+.buttons__container {
+  display: flex;
+  width: 30%;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 2rem auto;
+  background-color: inherit;
 }
