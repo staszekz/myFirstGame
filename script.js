@@ -4,6 +4,9 @@ const playground = document.querySelector('.container');
 const lifes = document.querySelector('.lifes');
 const score = document.querySelector('.score');
 const ship = document.querySelector('.ship');
+const modal = document.querySelector('.start');
+const startBtn = document.querySelector('.start__button');
+
 let initialResult = 0;
 let gameInterval = 3000;
 let interval = 25;
@@ -199,4 +202,11 @@ class Game {
   // }
 }
 
-const game = new Game(20);
+const startGame = () => {
+  modal.style.display = 'none';
+  new Game(10);
+};
+
+startBtn.addEventListener('click', startGame);
+
+// const game = new Game(20);

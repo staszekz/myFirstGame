@@ -2,9 +2,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+body {
   background-color: aquamarine;
 }
-
 .container {
   width: 610px;
   height: 700px;
@@ -74,7 +75,7 @@
   transform: translate(-50%, -50%);
   height: 50vh;
   width: 50vw;
-  background-color: rgb(166, 107, 221);
+  background-color: rgb(188, 144, 230);
   border: 1px solid black;
   border-radius: 5px;
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
@@ -86,11 +87,8 @@
   align-items: center;
   width: 30%;
   margin: 10px auto;
-  background-color: inherit;
 }
-.start__name {
-  background-color: inherit;
-}
+
 .input {
   background-color: lightgray;
   border: none;
@@ -108,7 +106,6 @@
 
 .start__header {
   margin: 0 auto;
-  background-color: inherit;
 }
 
 .buttons__container {
@@ -117,5 +114,10 @@
   align-items: center;
   justify-content: space-evenly;
   margin: 2rem auto;
-  background-color: inherit;
+}
+
+.gameManual {
+  margin: 2rem auto;
+  font-size: 1.5rem;
+  text-align: center;
 }
