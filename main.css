@@ -28,6 +28,7 @@ body {
   background-size: cover;
   /* border: 1px solid black; */
   background-color: #28bcbe;
+  border-radius: 7px;
 }
 
 .controlPanel {
@@ -71,6 +72,7 @@ body {
 .start {
   position: absolute;
   display: flex;
+  padding: 1rem;
   flex-direction: column;
   top: 50%;
   left: 50%;
@@ -88,7 +90,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  width: 50%;
   margin: 10px auto;
 }
 
@@ -111,6 +113,7 @@ body {
 .start__name {
   margin: 0 auto;
   text-align: center;
+  width: 100%;
 }
 
 .buttons__container {

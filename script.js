@@ -6,6 +6,8 @@ const score = document.querySelector('.score');
 const ship = document.querySelector('.ship');
 const modal = document.querySelector('.start');
 const startBtn = document.querySelector('.start__button');
+const quitBtn = document.querySelector('.quit__button');
+
 
 let initialResult = 0;
 let gameInterval = 2000;
@@ -58,9 +60,6 @@ class Obstacle {
     this.collisionInterval = setInterval(() => {
       const shipElementRect = ship.getBoundingClientRect();
       const obstacleElementRect = this.obstacleElement.getBoundingClientRect();
-      // console.log(`ship`, shipElementRect);
-      // console.log(`obstacje`, obstacleElementRect);
-      // // console.log(`rect`, ship.getBoundingClientRect());
 
       if (obstacleElementRect === undefined) {
         return clearInterval(this.collisionInterval);
@@ -210,9 +209,12 @@ class Game {
 
 const startGame = () => {
   modal.style.display = 'none';
-  new Game(10);
+  new Game(5);
 };
 
 startBtn.addEventListener('click', startGame);
+quitBtn.addEventListener('click', () => {
+  document.location.href = 'https://www.google.com'
+})
 
 // const game = new Game(20);
