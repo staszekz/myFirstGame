@@ -3,18 +3,19 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
-  background-color: aquamarine;
+  background-color: #473E3F;
 }
+
 .container {
+  position: relative;
   width: 610px;
   height: 700px;
   /* border: 1px solid black; */
-  border: 10px solid green;
-  margin: 20px auto;
-  position: relative;
-
-  background-color: lightsteelblue;
+  border: 2px solid#EF7126;
+  margin: 200px auto 20px;
+  background-color: #8EDC9D;
 }
 
 .ship {
@@ -26,7 +27,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   /* border: 1px solid black; */
-  background-color: rgb(156, 204, 94);
+  background-color: #28bcbe;
 }
 
 .controlPanel {
@@ -34,7 +35,8 @@ body {
   align-items: center;
   width: 600px;
   margin: 20px auto;
-  border: 1px dotted gray;
+  color: lightgrey;
+  /* border: 1px dotted gray; */
 }
 
 .button {
@@ -43,8 +45,8 @@ body {
   margin-right: 1rem;
   font-size: 1.5rem;
   border-radius: 7px;
-  border: 2px solid orangered;
-  background: orange;
+  border: 2px solid #F9E559;
+  background: #F9E559;
 }
 
 .lifesLeft,
@@ -75,11 +77,12 @@ body {
   transform: translate(-50%, -50%);
   height: 50vh;
   width: 50vw;
-  background-color: rgb(188, 144, 230);
+  background-color: #6CCECB;
   border: 1px solid black;
   border-radius: 5px;
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
 }
+
 .start__player {
   display: flex;
   flex-direction: column;
@@ -104,8 +107,10 @@ body {
   letter-spacing: 1px;
 }
 
-.start__header {
+.start__header,
+.start__name {
   margin: 0 auto;
+  text-align: center;
 }
 
 .buttons__container {

@@ -8,8 +8,8 @@ const modal = document.querySelector('.start');
 const startBtn = document.querySelector('.start__button');
 
 let initialResult = 0;
-let gameInterval = 3000;
-let interval = 25;
+let gameInterval = 2000;
+let interval = 20;
 
 class Obstacle {
   constructor() {}
@@ -23,19 +23,25 @@ class Obstacle {
   }
   changeInterval() {
     if (score.innerText > 10) {
-      interval = 20;
-    }
-    if (score.innerText > 20) {
-      gameInterval = 2500;
-    }
-    if (score.innerText > 30) {
       interval = 15;
     }
+    if (score.innerText > 20) {
+      gameInterval = 1000;
+    }
+    if (score.innerText > 30) {
+      interval = 10;
+      gameInterval = 700;
+    }
     if (score.innerText > 40) {
-      gameInterval = 2000;
+      gameInterval = 400;
     }
     if (score.innerText > 50) {
-      gameInterval = 1500;
+      gameInterval = 300;
+      interval = 7;
+    }
+    if (score.innerText > 70) {
+      gameInterval = 200;
+      interval = 5;
     }
   }
   append() {
