@@ -7,7 +7,9 @@ const ship = document.querySelector('.ship');
 const modal = document.querySelector('.start');
 const startBtn = document.querySelector('.start__button');
 const quitBtn = document.querySelector('.quit__button');
-
+const endModal = document.querySelector('.endModal');
+const winnersList = document.querySelector('.table__body');
+const form = document.querySelector('.input');
 
 let initialResult = 0;
 let gameInterval = 2000;
@@ -137,7 +139,7 @@ class Player {
 
   moveRight() {
     if (this.positionX >= 520) {
-      this.positionX = -20;
+      this.positionX = 520;
       ship.style.left = `${this.positionX}px`;
     }
     this.positionX += 20;
@@ -147,7 +149,7 @@ class Player {
 
   moveLeft() {
     if (this.positionX <= 0) {
-      this.positionX = 540;
+      this.positionX = 20;
       ship.style.left = `${this.positionX}px`;
     }
     this.positionX -= 20;
@@ -167,54 +169,76 @@ class Player {
 
 class Game {
   constructor(life) {
-    // this.positionZero = 0;
     lifes.innerText = life;
     score.innerText = 0;
     this.results = new Results(life);
     this.player = new Player();
     this.createObstacle();
-    // this.clearResult();
-    // this.clear();
     console.log(lifes.innerText);
   }
   createObstacle() {
     let lp = 1;
     this.startInterval = setInterval(() => {
       if (lifes.innerText < 1) {
-        return clearInterval(this.startInterval);
+        clearInterval(this.startInterval);
+        addingPlayer();
+        localStorage.setItem(form.value, score.innerText);
+
+        endModal.style.display = 'flex';
+        db.collection('winnersInGame')
+          .get()
+          .then(snapshot => {
+            snapshot.docs.forEach(doc => {
+              renderTable(doc);
+            });
+          });
       }
 
       new Obstacle().run(lp);
       lp++;
     }, gameInterval);
   }
-  // clearResult() {
-  //   const lifesLeft = document.querySelector(".lifes");
-  //   console.log(lifesLeft.innerText);
-  //   setInterval(() => {
-  //     if (lifesLeft.innerText < 1) {
-  //       lifes.innerText = 0;
-  //     }
-  //   }, 10);
-  // }
-  // clear() {
-  //   if (lifes.innerText === 0) {
-  //     return this.stopGame();
-  //   }
-  // }
-  // stopGame() {
-  //   clearInterval(this.startInterval);
-  // }
 }
 
 const startGame = () => {
   modal.style.display = 'none';
-  new Game(5);
+  new Game(2);
 };
 
 startBtn.addEventListener('click', startGame);
 quitBtn.addEventListener('click', () => {
-  document.location.href = 'https://www.google.com'
-})
+  document.location.href = 'https://www.google.com';
+});
 
 // const game = new Game(20);
+//getting data
+function renderTable(doc) {
+  const nick = document.createElement('td');
+  const result = document.createElement('td');
+  const tr = document.createElement('tr');
+
+  tr.setAttribute('data-id', doc.id);
+  nick.textContent = doc.data().nick;
+  result.textContent = doc.data().result;
+
+  tr.appendChild(nick);
+  tr.appendChild(result);
+  winnersList.appendChild(tr);
+
+  console.log(doc.data());
+}
+
+//saving new data
+const playerName = document.querySelector('.player__name');
+
+form.addEventListener('keyup', e => {
+  form.value = e.target.value;
+  playerName.innerText = e.target.value;
+});
+
+function addingPlayer() {
+  db.collection('winnersInGame').add({
+    nick: form.value,
+    result: score.innerText,
+  });
+}

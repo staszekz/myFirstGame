@@ -1,39 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="main.css" />
-    <link rel="shortcut icon" type="image/png" href="./img/dollarCoin.png" />
-    <title>Play a game!</title>
-  </head>
 
-  <body>
-    <div class="container">
-      <div class="ship"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-firestore.js"></script>
+  <link rel="stylesheet" href="main.css" />
+  <link rel="shortcut icon" type="image/png" href="./img/dollarCoin.png" />
+  <title>Play a game!</title>
+</head>
+
+<body>
+  <h1 class="player__header">Player: <span class="player__name"></span> </h1>
+  <div class="container">
+    <div class="ship"></div>
+  </div>
+  <div class="controlPanel">
+    <button class="button button--left">LEFT</button>
+    <button class="button button--right">RIGHT</button>
+    <p class="lifesLeft">Lifes left: <span class="lifes"> </span></p>
+    <p class="result">Result: <span class="score"> </span><span>$</span></p>
+  </div>
+  <div class="start">
+    <p class="gameManual">
+      Pick so many $ as you can! <br />You can move safebox by arrows, A & D keys or by clicking
+      buttons.<br />
+      <strong>Enter your name to be on a winners list. </strong>
+    </p>
+    <div class="start__player">
+      <h1 class="start__name">Enter your name</h1>
+      <input class="input" type='text' placeholder="nick" value="" />
     </div>
-    <div class="controlPanel">
-      <button class="button button--left">LEFT</button>
-      <button class="button button--right">RIGHT</button>
-      <p class="lifesLeft">Lifes left: <span class="lifes"> </span></p>
-      <p class="result">Result: <span class="score"> </span><span>$</span></p>
+    <h1 class="start__header">Click to start a game</h1>
+    <div class="buttons__container">
+      <button class="button start__button">START</button>
+      <button class="button quit__button">QUIT</button>
     </div>
-    <div class="start">
-      <p class="gameManual">
-        Pick so many $ as you can! <br />You can move safebox by arrows, A & D keys or by clicking
-        buttons.<br />
-        <strong>Enter your name to be on a winners list. </strong>
-      </p>
-      <div class="start__player">
-        <h1 class="start__name">Enter your name</h1>
-        <input class="input" placeholder="Name" value="" />
-      </div>
-      <h1 class="start__header">Click to start a game</h1>
-      <div class="buttons__container">
-        <button class="button start__button">START</button>
-        <button class="button quit__button">QUIT</button>
-      </div>
-    </div>
-    <script src="./script.js"></script>
-  </body>
+  </div>
+
+  <div class="endModal">
+    <h1 class="endModal__header">You were able to pick <span class="endModal__result"> ...</span> $</h1>
+    <table>
+      <caption>The List of Winners</caption>
+      <thead>
+        <tr>
+          <th>Nick</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody class="table__body">
+
+      </tbody>
+    </table>
+    <tbody class="winnersList">
+
+      </table>
+  </div>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-analytics.js"></script> -->
+
+  <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyCMfCjdfeq1rlPO2YcPnAZFU6zNO5rTH3w",
+      authDomain: "firstgame-e9d9c.firebaseapp.com",
+      databaseURL: "https://firstgame-e9d9c.firebaseio.com",
+      projectId: "firstgame-e9d9c",
+      storageBucket: "firstgame-e9d9c.appspot.com",
+      messagingSenderId: "344789726492",
+      appId: "1:344789726492:web:3c81c55e9252380eb6b6d9",
+      measurementId: "G-F148G3KTL5"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // firebase.analytics();
+
+    const db = firebase.firestore();
+  </script>
+  <script src="./script.js"></script>
+  <script src="./endModal.js"></script>
+
+</body>
+
 </html>

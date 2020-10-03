@@ -14,8 +14,17 @@ body {
   height: 700px;
   /* border: 1px solid black; */
   border: 2px solid#EF7126;
-  margin: 200px auto 20px;
+  margin: 0 auto 20px;
   background-color: #8EDC9D;
+}
+
+.player__name,
+.player__header {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin: 150px auto 0;
+  color: lightgray;
 }
 
 .ship {
@@ -69,7 +78,8 @@ body {
   /* border: 1px solid black; */
 }
 
-.start {
+.start,
+.endModal {
   position: absolute;
   display: flex;
   padding: 1rem;
@@ -83,6 +93,10 @@ body {
   border: 1px solid black;
   border-radius: 5px;
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.endModal {
+  display: none;
 }
 
 .start__player {
@@ -110,7 +124,8 @@ body {
 }
 
 .start__header,
-.start__name {
+.start__name,
+.endModal__header {
   margin: 0 auto;
   text-align: center;
   width: 100%;
