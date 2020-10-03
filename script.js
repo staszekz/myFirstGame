@@ -183,12 +183,11 @@ class Game {
     this.startInterval = setInterval(() => {
       if (lifes.innerText < 1) {
         clearInterval(this.startInterval);
+        endModal.style.display = 'flex';
+        endModalResult.innerText = score.innerText;
         addingPlayer();
         // localStorage.setItem(form.value, score.innerText);
         fetchingWinners();
-
-        endModal.style.display = 'flex';
-        endModalResult.innerText = score.innerText;
       }
 
       new Obstacle().run(lp);
@@ -241,6 +240,8 @@ form.addEventListener('keyup', e => {
 
 function fetchingWinners() {
   db.collection('winnersInGame')
+    .orderBy('result', 'desc')
+    .limit(16)
     .get()
     .then(snapshot => {
       console.log(snapshot.docs);
@@ -256,6 +257,6 @@ function addingPlayer() {
   }
   db.collection('winnersInGame').add({
     nick: form.value,
-    result: score.innerText,
+    result: parseInt(score.innerText, 10),
   });
 }

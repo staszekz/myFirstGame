@@ -50,9 +50,10 @@ body {
 }
 
 .button {
-  width: 100px;
+  min-width: 100px;
   height: 60px;
   margin-right: 1rem;
+  padding: 0.5rem;
   font-size: 1.5rem;
   border-radius: 7px;
   border: 2px solid #F9E559;
@@ -63,7 +64,7 @@ body {
 .result,
 .lives,
 .score {
-  font-size: 2rem;
+  font-size: 1.6rem;
   padding-right: 1rem;
 }
 
@@ -75,7 +76,6 @@ body {
   background-image: url('./img/dollarCoin.png');
   background-size: contain;
   overflow: hidden;
-  /* border: 1px solid black; */
 }
 
 table {
@@ -103,14 +103,6 @@ tr:nth-child(2n) {
   background-color: #8EDC9D;
 }
 
-
-/* table tr:last-child td:first-child {
-  border-bottom-left-radius: 100px;
-}
-
-table tr:last-child td:last-child {
-  border-bottom-right-radius: 100px;
-} */
 
 .caption {
   font-size: 1.5rem;
