@@ -10,6 +10,8 @@ const quitBtn = document.querySelector('.quit__button');
 const endModal = document.querySelector('.endModal');
 const winnersList = document.querySelector('.table__body');
 const form = document.querySelector('.input');
+const playerName = document.querySelector('.player__name');
+const endModalResult = document.querySelector('.endModal__result');
 
 let initialResult = 0;
 let gameInterval = 2000;
@@ -182,16 +184,11 @@ class Game {
       if (lifes.innerText < 1) {
         clearInterval(this.startInterval);
         addingPlayer();
-        localStorage.setItem(form.value, score.innerText);
+        // localStorage.setItem(form.value, score.innerText);
+        fetchingWinners();
 
         endModal.style.display = 'flex';
-        db.collection('winnersInGame')
-          .get()
-          .then(snapshot => {
-            snapshot.docs.forEach(doc => {
-              renderTable(doc);
-            });
-          });
+        endModalResult.innerText = score.innerText;
       }
 
       new Obstacle().run(lp);
@@ -202,6 +199,9 @@ class Game {
 
 const startGame = () => {
   modal.style.display = 'none';
+  if (!form.value) {
+    playerName.innerText = 'anonymous';
+  }
   new Game(2);
 };
 
@@ -211,16 +211,20 @@ quitBtn.addEventListener('click', () => {
 });
 
 // const game = new Game(20);
+
 //getting data
-function renderTable(doc) {
+function renderTable(doc, i) {
   const nick = document.createElement('td');
   const result = document.createElement('td');
+  const listId = document.createElement('td');
   const tr = document.createElement('tr');
 
+  listId.innerText = i + 1;
   tr.setAttribute('data-id', doc.id);
   nick.textContent = doc.data().nick;
   result.textContent = doc.data().result;
 
+  tr.appendChild(listId);
   tr.appendChild(nick);
   tr.appendChild(result);
   winnersList.appendChild(tr);
@@ -229,14 +233,27 @@ function renderTable(doc) {
 }
 
 //saving new data
-const playerName = document.querySelector('.player__name');
 
 form.addEventListener('keyup', e => {
   form.value = e.target.value;
   playerName.innerText = e.target.value;
 });
 
+function fetchingWinners() {
+  db.collection('winnersInGame')
+    .get()
+    .then(snapshot => {
+      console.log(snapshot.docs);
+      snapshot.docs.forEach((doc, i) => {
+        renderTable(doc, i);
+      });
+    });
+}
+
 function addingPlayer() {
+  if (!form.value || form.value === 'anonymous') {
+    return null;
+  }
   db.collection('winnersInGame').add({
     nick: form.value,
     result: score.innerText,

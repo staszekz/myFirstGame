@@ -78,6 +78,46 @@ body {
   /* border: 1px solid black; */
 }
 
+table {
+  text-align: center;
+  /* border-collapse: collapse; */
+  color: #0c0b0b;
+  margin: 2rem;
+}
+
+th,
+td {
+  border: 1px solid #6b5f61;
+  padding: 5px 10px;
+  font-size: 1.1rem;
+  border-radius: 7px;
+
+}
+
+
+tr:nth-child(2n) {
+  background-color: #79dbd8;
+}
+
+.header__row {
+  background-color: #8EDC9D;
+}
+
+
+/* table tr:last-child td:first-child {
+  border-bottom-left-radius: 100px;
+}
+
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 100px;
+} */
+
+.caption {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
 .start,
 .endModal {
   position: absolute;
@@ -97,6 +137,7 @@ body {
 
 .endModal {
   display: none;
+  overflow: auto;
 }
 
 .start__player {
@@ -129,6 +170,10 @@ body {
   margin: 0 auto;
   text-align: center;
   width: 100%;
+}
+
+.endModal__header {
+  color: #332c2d;
 }
 
 .buttons__container {
