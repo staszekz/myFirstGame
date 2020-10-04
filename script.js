@@ -37,11 +37,12 @@ class Obstacle {
       gameInterval = 1000;
     }
     if (score.innerText > 30) {
-      interval = 10;
-      gameInterval = 700;
+      interval = 15;
+      gameInterval = 500;
     }
     if (score.innerText > 40) {
-      gameInterval = 400;
+      gameInterval = 300;
+      interval = 15;
     }
     if (score.innerText > 50) {
       gameInterval = 300;
