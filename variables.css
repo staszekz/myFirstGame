@@ -1,0 +1,12 @@
+:root {
+	--background-color: #473E3F;
+	--playground-color: #8EDC9D;
+	--button-color: #F9E559;
+	--text-color: #D3D3D3;
+	--modal-color: #6CCECB;
+	--ship-color: #28bcbe;
+	--light-modal-color: #79dbd8;
+
+	--shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
+	--radius: 7px;
+}

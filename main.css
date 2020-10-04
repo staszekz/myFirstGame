@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: #473E3F;
+  background-color: var(--background-color);
 }
 
 .container {
@@ -15,7 +15,7 @@ body {
   /* border: 1px solid black; */
   border: 2px solid#EF7126;
   margin: 0 auto 20px;
-  background-color: #8EDC9D;
+  background-color: var(--playground-color);
 }
 
 .player__name,
@@ -24,7 +24,7 @@ body {
   width: 100%;
   text-align: center;
   margin: 150px auto 0;
-  color: lightgray;
+  color: var(--text-color);
 }
 
 .ship {
@@ -35,8 +35,7 @@ body {
   background-image: url('./img/safebox.png');
   background-repeat: no-repeat;
   background-size: cover;
-  /* border: 1px solid black; */
-  background-color: #28bcbe;
+  background-color: var(--ship-color);
   border-radius: 7px;
 }
 
@@ -45,8 +44,7 @@ body {
   align-items: center;
   width: 600px;
   margin: 20px auto;
-  color: lightgrey;
-  /* border: 1px dotted gray; */
+  color: var(--text-color);
 }
 
 .button {
@@ -56,8 +54,9 @@ body {
   padding: 0.5rem;
   font-size: 1.5rem;
   border-radius: 7px;
-  border: 2px solid #F9E559;
-  background: #F9E559;
+  /* border: 1px solid var(--button-color); */
+  box-shadow: var(--shadow);
+  background: var(--button-color);
 }
 
 .playAgain__button {
@@ -88,7 +87,6 @@ body {
 
 table {
   text-align: center;
-  /* border-collapse: collapse; */
   color: #0c0b0b;
   margin: 2rem;
 }
@@ -98,17 +96,17 @@ td {
   border: 1px solid #6b5f61;
   padding: 5px 10px;
   font-size: 1.1rem;
-  border-radius: 7px;
+  border-radius: var(--radius);
 
 }
 
 
 tr:nth-child(2n) {
-  background-color: #79dbd8;
+  background-color: var(--light-modal-color);
 }
 
 .header__row {
-  background-color: #8EDC9D;
+  background-color: var(--playground-color);
 }
 
 
@@ -129,10 +127,10 @@ tr:nth-child(2n) {
   transform: translate(-50%, -50%);
   height: 50vh;
   width: 50vw;
-  background-color: #6CCECB;
+  background-color: var(--modal-color);
   border: 1px solid black;
-  border-radius: 5px;
-  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
 .endModal {
@@ -150,7 +148,7 @@ tr:nth-child(2n) {
 }
 
 .input {
-  background-color: lightgray;
+  background-color: var(--text-color);
   border: none;
   border-radius: 50px;
   margin-top: 1rem;
@@ -198,7 +196,7 @@ tr:nth-child(2n) {
   height: 100%;
   padding: 2rem;
   background-color: #473E3F;
-  color: lightgrey;
+  color: var(--text-color);
   align-items: center;
   justify-content: center;
   font-size: 3rem;
