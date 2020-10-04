@@ -148,7 +148,7 @@ class Player {
       ship.style.left = `${this.positionX}px`;
     }
     this.positionX += 20;
-    console.log(`position`, this.positionX);
+    // console.log(`position`, this.positionX);
     ship.style.left = `${this.positionX}px`;
   }
 
@@ -158,7 +158,7 @@ class Player {
       ship.style.left = `${this.positionX}px`;
     }
     this.positionX -= 20;
-    console.log(`position left`, this.positionX);
+    // console.log(`position left`, this.positionX);
     ship.style.left = `${this.positionX}px`;
   }
 
@@ -179,7 +179,7 @@ class Game {
     this.results = new Results(life);
     this.player = new Player();
     this.createObstacle();
-    console.log(lifes.innerText);
+    // console.log(lifes.innerText);
   }
   createObstacle() {
     let lp = 1;
@@ -189,7 +189,6 @@ class Game {
         endModal.style.display = 'flex';
         endModalResult.innerText = score.innerText;
         addingPlayer();
-        // localStorage.setItem(form.value, score.innerText);
         fetchingWinners();
       }
 
@@ -204,9 +203,11 @@ const startGame = () => {
   if (!form.value) {
     playerName.innerText = 'anonymous';
   }
-  new Game(2);
+  new Game(3);
 };
 
+
+//handling buttons
 startBtn.addEventListener('click', startGame);
 quitBtn.addEventListener('click', () => {
   document.location.href = 'https://www.google.com';
@@ -220,9 +221,8 @@ playAgain.addEventListener('click', () => {
   location.reload();
 });
 
-// const game = new Game(20);
 
-//getting data
+//getting data from firebase
 function renderTable(doc, i) {
   const nick = document.createElement('td');
   const result = document.createElement('td');
@@ -239,11 +239,10 @@ function renderTable(doc, i) {
   tr.appendChild(result);
   winnersList.appendChild(tr);
 
-  console.log(doc.data());
+  // console.log(doc.data());
 }
 
-//saving new data
-
+//saving new data into firebase
 form.addEventListener('keyup', e => {
   form.value = e.target.value;
   playerName.innerText = e.target.value;
@@ -255,7 +254,7 @@ function fetchingWinners() {
     .limit(14)
     .get()
     .then(snapshot => {
-      console.log(snapshot.docs);
+      // console.log(snapshot.docs);
       snapshot.docs.forEach((doc, i) => {
         renderTable(doc, i);
       });
@@ -271,9 +270,3 @@ function addingPlayer() {
     result: parseInt(score.innerText, 10),
   });
 }
-
-//dodać przycisk quit podczas gry
-//dodać przycisk play again jak się skończy gra
-
-//dodać bonusowe punkty spadające, albo złodziej który podkrada pieniądze
-//ze nie dostepna na komórkach, dodac @media z hasłem że tylko desktop
