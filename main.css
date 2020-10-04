@@ -60,6 +60,14 @@ body {
   background: #F9E559;
 }
 
+.playAgain__button {
+  width: 100px;
+  height: 80px;
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+}
+
 .lifesLeft,
 .result,
 .lives,

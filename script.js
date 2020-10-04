@@ -7,11 +7,13 @@ const ship = document.querySelector('.ship');
 const modal = document.querySelector('.start');
 const startBtn = document.querySelector('.start__button');
 const quitBtn = document.querySelector('.quit__button');
+const quitInGameBtn = document.querySelector('.quitInGame__button');
 const endModal = document.querySelector('.endModal');
 const winnersList = document.querySelector('.table__body');
 const form = document.querySelector('.input');
 const playerName = document.querySelector('.player__name');
 const endModalResult = document.querySelector('.endModal__result');
+const playAgain = document.querySelector('.playAgain__button');
 
 let initialResult = 0;
 let gameInterval = 2000;
@@ -82,7 +84,7 @@ class Obstacle {
   }
   setIntervalElement(lp) {
     this.moveIntervalRef = setInterval(() => {
-      this.obstacleElement.style.top = this.obstacleElement.offsetTop + 3 + 'px';
+      this.obstacleElement.style.top = this.obstacleElement.offsetTop + 4 + 'px';
 
       const obstacleElementRect = this.obstacleElement.getClientRects()[0];
       const playgroundElementRect = playground.getClientRects()[0];
@@ -209,6 +211,14 @@ quitBtn.addEventListener('click', () => {
   document.location.href = 'https://www.google.com';
 });
 
+quitInGameBtn.addEventListener('click', () => {
+  lifes.innerText = 0;
+});
+
+playAgain.addEventListener('click', () => {
+  location.reload();
+});
+
 // const game = new Game(20);
 
 //getting data
@@ -241,7 +251,7 @@ form.addEventListener('keyup', e => {
 function fetchingWinners() {
   db.collection('winnersInGame')
     .orderBy('result', 'desc')
-    .limit(16)
+    .limit(14)
     .get()
     .then(snapshot => {
       console.log(snapshot.docs);
@@ -260,3 +270,9 @@ function addingPlayer() {
     result: parseInt(score.innerText, 10),
   });
 }
+
+//dodać przycisk quit podczas gry
+//dodać przycisk play again jak się skończy gra
+
+//dodać bonusowe punkty spadające, albo złodziej który podkrada pieniądze
+//ze nie dostepna na komórkach, dodac @media z hasłem że tylko desktop
