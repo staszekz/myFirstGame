@@ -42,6 +42,7 @@ body {
 .controlPanel {
   display: flex;
   align-items: center;
+  justify-content: space-around;
   width: 600px;
   margin: 20px auto;
   color: var(--text-color);
@@ -59,6 +60,10 @@ body {
   background: var(--button-color);
 }
 
+.quitInGame__button {
+  margin-right: 0;
+}
+
 .playAgain__button {
   width: 100px;
   height: 80px;
@@ -73,6 +78,11 @@ body {
 .score {
   font-size: 1.6rem;
   padding-right: 1rem;
+  text-align: center;
+}
+
+.score {
+  padding-right: 0;
 }
 
 .obstacle {
@@ -97,9 +107,7 @@ td {
   padding: 5px 10px;
   font-size: 1.1rem;
   border-radius: var(--radius);
-
 }
-
 
 tr:nth-child(2n) {
   background-color: var(--light-modal-color);
@@ -108,7 +116,6 @@ tr:nth-child(2n) {
 .header__row {
   background-color: var(--playground-color);
 }
-
 
 .caption {
   font-size: 1.5rem;
@@ -195,11 +202,42 @@ tr:nth-child(2n) {
   width: 100%;
   height: 100%;
   padding: 2rem;
-  background-color: #473E3F;
+  background-color: #473e3f;
   color: var(--text-color);
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   font-size: 3rem;
+}
+
+.loader {
+  position: inherit;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+}
+
+.loader:after {
+  content: ' ';
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid var(--button-color);
+  border-color: var(--button-color) transparent var(--button-color) transparent;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 600px) {

@@ -172,6 +172,7 @@ class Player {
   }
 }
 
+const loader = document.querySelector('.loader');
 class Game {
   constructor(life) {
     lifes.innerText = life;
@@ -185,6 +186,7 @@ class Game {
     let lp = 1;
     this.startInterval = setInterval(() => {
       if (lifes.innerText < 1) {
+        loader.style.display = 'block';
         clearInterval(this.startInterval);
         endModal.style.display = 'flex';
         endModalResult.innerText = score.innerText;
@@ -206,7 +208,6 @@ const startGame = () => {
   new Game(3);
 };
 
-
 //handling buttons
 startBtn.addEventListener('click', startGame);
 quitBtn.addEventListener('click', () => {
@@ -221,7 +222,6 @@ playAgain.addEventListener('click', () => {
   location.reload();
 });
 
-
 //getting data from firebase
 function renderTable(doc, i) {
   const nick = document.createElement('td');
@@ -233,6 +233,7 @@ function renderTable(doc, i) {
   tr.setAttribute('data-id', doc.id);
   nick.textContent = doc.data().nick;
   result.textContent = doc.data().result;
+  loader.style.display = 'none';
 
   tr.appendChild(listId);
   tr.appendChild(nick);
